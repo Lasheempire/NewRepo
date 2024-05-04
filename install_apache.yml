@@ -4,16 +4,14 @@
   become: true
   tasks:
 
-  - name: update respository
-    apt:
-     update_cache: yes
 
-  - name: Install apache2 package
+  - name: Install apache2 and php
     apt:
-      name: apache2
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes
     when: ansible_distribution == "CentOS"
 
-  - name: add php support for apache
-    apt:
-      name: libapache2-mod-php
-    when: ansible_distribution == "CentOS"
+
